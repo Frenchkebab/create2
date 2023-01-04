@@ -28,6 +28,8 @@
 
 ### create
 
+`keccak256(rlp([sender, nonce]))[12:]`
+
 `create` creates a contract using **address** and **nonce** of `msg.sender`.
 
 ### create2
