@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { ethers } = require('hardhat');
 
-describe('Greeter', function () {
+describe('Create2', function () {
   let create2Factory;
   let deployer;
   const SALT = 777;

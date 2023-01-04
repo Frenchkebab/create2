@@ -1,42 +1,37 @@
-# Advanced Sample Hardhat Project
+# Calculating contract address before its creation
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+## [0] Setup
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
+### 1) Clone the repository
 
-Try running some of the following tasks:
+`$ git clone https://github.com/Frenchkebab/create2.git`
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.js
-node scripts/deploy.js
-npx eslint '**/*.js'
-npx eslint '**/*.js' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
+### 2) Install dependencies
+
+`$ npx install`
+
+## [1] Test
+
+`npx hardhat test`
+
+### Result
+
+```
+  Create2
+    ✔ should calculate its address before DeployWithCreate2 contract is created (54ms)
+
+
+  1 passing (450ms)
 ```
 
-# Etherscan verification
+## [2] Note
 
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
+### create
 
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
+`create` creates a contract using **address** and **nonce** of `msg.sender`.
 
-```shell
-hardhat run --network ropsten scripts/deploy.js
-```
+### create2
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
+`keccak256( 0xff ++ address ++ salt ++ keccak256(init_code))[12:]`
 
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
-```
+`create2` creates a contract using **salt** and **creationCode** instead of **nonce**, thus making it possible to calculate address of the contract before its creation.
