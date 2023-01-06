@@ -13,12 +13,18 @@ describe('Create2', function () {
     );
     create2Factory = await Create2FactoryFactory.deploy();
     await create2Factory.deployed();
+
+    console.log('');
+    console.log('\tSALT: ', SALT);
   });
 
   it('should calculate its address before DeployWithCreate2 contract is created', async function () {
     const bytecode = await create2Factory.getBytecode(deployer.address);
 
     const calculatedAddress = await create2Factory.getAddress(bytecode, SALT);
+
+    console.log('');
+    console.log('\tCalculated Address : ', calculatedAddress);
 
     const deployTx = await create2Factory.deploy(SALT);
     const receipt = await deployTx.wait();
@@ -27,6 +33,8 @@ describe('Create2', function () {
       receipt.events[0].data,
       20
     );
+
+    console.log('\tDeployed Addrss    : ', deployedAddress);
 
     expect(calculatedAddress.toLowerCase()).to.equal(
       deployedAddress.toLowerCase()

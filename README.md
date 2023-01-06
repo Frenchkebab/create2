@@ -18,10 +18,15 @@
 
 ```
   Create2
-    ✔ should calculate its address before DeployWithCreate2 contract is created (54ms)
+
+        SALT:  777
+
+        Calculated Address :  0x7f49500Acc41aC0B16A1101448E347918CA896A5
+        Deployed Addrss    :  0x7f49500acc41ac0b16a1101448e347918ca896a5
+    ✔ should calculate its address before DeployWithCreate2 contract is created (48ms)
 
 
-  1 passing (450ms)
+  1 passing (358ms)
 ```
 
 ## [2] Note
